@@ -1,0 +1,15 @@
+#!/bin/bash
+
+#############################################################################
+#
+#   initialization for elasticsearch
+#
+#############################################################################
+
+declare -r config_dir=${CONFIG_DIR:?}
+declare -r workspace_dir=${WORKSPACE_DIR:?} 
+
+[ -f ${workspace_dir}/.elasticsearch.init ] && exit 0 
+touch ${workspace_dir}/.elasticsearch.init
+
+cp ${config_dir}/elasticsearch/elasticsearch.yml ${workspace_dir}/elasticsearch

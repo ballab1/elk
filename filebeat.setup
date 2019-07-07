@@ -1,0 +1,15 @@
+#!/bin/bash
+
+#############################################################################
+#
+#   initialization for filebeat
+#
+#############################################################################
+
+declare -r config_dir=${CONFIG_DIR:?}
+declare -r workspace_dir=${WORKSPACE_DIR:?} 
+
+[ -f ${workspace_dir}/.filebeat.init ] && exit 0 
+touch ${workspace_dir}/.filebeat.init
+
+cp ${config_dir}/filebeat/filebeat.yml ${workspace_dir}/filebeat

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+#############################################################################
+#
+#   initialization for metricbeat
+#
+#############################################################################
+
+declare -r config_dir=${CONFIG_DIR:?}
+declare -r workspace_dir=${WORKSPACE_DIR:?} 
+
+[ -f ${workspace_dir}/.metricbeat.init ] && exit 0 
+touch ${workspace_dir}/.metricbeat.init
+
+cp ${config_dir}/metricbeat/metricbeat.yml ${workspace_dir}/metricbeat

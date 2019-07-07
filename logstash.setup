@@ -1,0 +1,15 @@
+#!/bin/bash
+
+#############################################################################
+#
+#   initialization for logstash
+#
+#############################################################################
+
+declare -r config_dir=${CONFIG_DIR:?}
+declare -r workspace_dir=${WORKSPACE_DIR:?} 
+
+[ -f ${workspace_dir}/.logstash.init ] && exit 0 
+touch ${workspace_dir}/.logstash.init
+
+cp ${config_dir}/logstash/logstash.yml ${workspace_dir}/logstash

@@ -1,0 +1,29 @@
+filebeat.config:
+  modules:
+    path: ${path.config}/modules.d/*.yml
+    reload.enabled: false
+
+filebeat.autodiscover:
+  providers:
+    - type: docker
+      hints.enabled: true
+
+filebeat.prospectors:
+    - paths:
+        - my_json.log
+      fields_under_root: true
+      fields:
+        tags: ['json']
+
+
+output {
+  logstash {
+    hosts => ['logstash:5044']
+  }
+  elasticsearch { 
+    hosts => ["elasticsearch:9200"] 
+  }
+}
+
+setup.kibana:
+  host: "kibana:5601"

@@ -1,0 +1,15 @@
+y#!/bin/bash
+
+#############################################################################
+#
+#   initialization for kibana
+#
+#############################################################################
+
+declare -r config_dir=${CONFIG_DIR:?}
+declare -r workspace_dir=${WORKSPACE_DIR:?} 
+
+[ -f ${workspace_dir}/.kibana.init ] && exit 0 
+touch ${workspace_dir}/.kibana.init
+
+cp ${config_dir}/kibana/kibana.yml ${workspace_dir}/kibana
