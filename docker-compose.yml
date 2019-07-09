@@ -31,14 +31,12 @@ services:
         volumes:
             - ./elasticsearch/data:/usr/share/elasticsearch/data
             - ./elasticsearch/log:/var/log
-#            - ./elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
 
 
     filebeat:
         container_name: filebeat
         environment:
             setup.kibana.host: kibana:5601
-#            output.elasticsearch.hosts: ["elasticsearch:9200"]
         hostname: filebeat
         image: ${DOCKER_REGISTRY:-ubuntu-s2:5000/}filebeat:${FILEBEAT_VERSION:-7.2.0}
         labels:
@@ -63,8 +61,6 @@ services:
 
     journalbeat:
         container_name: journalbeat
-#        environment:
-#            DEBUG_TRACE: ${DEBUG_TRACE:-0}
         hostname: journalbeat
         image: ${DOCKER_REGISTRY:-ubuntu-s2:5000/}journalbeat:${JOURNALBEAT_VERSION:-7.2.0}
         labels:
@@ -113,8 +109,6 @@ services:
 
     logstash:
         container_name: logstash
-#        environment:
-#            DEBUG_TRACE: ${DEBUG_TRACE:-0}
         hostname: logstash
         image: ${DOCKER_REGISTRY:-ubuntu-s2:5000/}logstash:${LOGSTASH_VERSION:-7.2.0}
         labels:
@@ -138,8 +132,6 @@ services:
 
     metricbeat:
         container_name: metricbeat
-#        environment:
-#            DEBUG_TRACE: ${DEBUG_TRACE:-0}
         hostname: metricbeat
         image: ${DOCKER_REGISTRY:-ubuntu-s2:5000/}metricbeat:${METRICBEAT_VERSION:-7.2.0}
         labels:

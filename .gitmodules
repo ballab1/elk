@@ -1,0 +1,3 @@
+[submodule "bashlibs"]
+	path = bashlib
+	url = ../bashlib.git
