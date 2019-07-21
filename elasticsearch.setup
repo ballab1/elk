@@ -9,6 +9,8 @@
 declare -r config_dir=${CONFIG_DIR:?}
 declare -r workspace_dir=${WORKSPACE_DIR:?} 
 
+sudo sysctl -w vm.max_map_count=262144
+
 [ -f ${workspace_dir}/.elasticsearch.init ] && exit 0 
 touch ${workspace_dir}/.elasticsearch.init
 
