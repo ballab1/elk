@@ -9,7 +9,14 @@
 declare -r config_dir=${CONFIG_DIR:?}
 declare -r workspace_dir=${WORKSPACE_DIR:?} 
 
-[ -f ${workspace_dir}/.logstash.init ] && exit 0 
-touch ${workspace_dir}/.logstash.init
+declare setup="$(basename "${BASH_SOURCE[0]}")"
+setup=".${setup%.*}.init"
+if [ ! -f "${workspace_dir}/$setup" ]; then
+    # perform initialization 
+    touch "${workspace_dir}/$setup"
+fi
 
-cp ${config_dir}/logstash/logstash.yml ${workspace_dir}/logstash
+# perform common
+
+
+sudo cp -r ${config_dir}/logstash ${workspace_dir}/

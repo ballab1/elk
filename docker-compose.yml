@@ -54,10 +54,12 @@ services:
                 max-size: "10m"
         restart: unless-stopped
         volumes:
-            - /var/lib/docker/containers:/var/lib/docker/containers:ro
-            - /var/run/docker.sock:/var/run/docker.sock:ro
-            - ./filebeat/filebeat.yml:/etc/filebeat//filebeat.yml:ro
+            - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
+            - ./filebeat/modules.d:/usr/share/filebeat/modules.d:ro
             - ./filebeat/log:/var/log:rw
+            - /var/lib/docker/containers:/var/lib/docker/containers:ro
+            - /var/run/docker.sock:/var/run/docker.sock
+            - /var/log:/hostfs/var/log:ro
 
     journalbeat:
         container_name: journalbeat
@@ -78,7 +80,8 @@ services:
                 max-size: "10m"
         restart: unless-stopped
         volumes:
-            - ./journalbeat:/etc/journalbeat:ro
+            - /var/log/journal:/host/journal:ro
+            - ./journalbeat/journalbeat.yml:/usr/share/journalbeat/journalbeat.yml:ro
             - ./journalbeat/log:/var/log:rw
 
     kibana:
@@ -148,10 +151,13 @@ services:
                 max-file: "3"
                 max-size: "10m"
         restart: unless-stopped
+        user: root
         volumes:
-            - ./metricbeat/metricbeat.yml:/etc/metricbeat/metricbeat.yml:ro
+            - ./metricbeat/metricbeat.yml:/usr/share/metricbeat/metricbeat.yml:ro
+#            - ./metricbeat/metricbeat.yml:/etc/metricbeat/metricbeat.yml:ro
+            - ./metricbeat/modules.d:/usr/share/metricbeat/modules.d:ro
             - ./metricbeat/log:/var/log
-            - /var/run/docker.sock:/var/run/docker.sock:ro
+            - /var/run/docker.sock:/var/run/docker.sock
             - /sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro
             - /proc:/hostfs/proc:ro
             - /:/hostfs:ro

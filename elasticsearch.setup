@@ -9,9 +9,15 @@
 declare -r config_dir=${CONFIG_DIR:?}
 declare -r workspace_dir=${WORKSPACE_DIR:?} 
 
+declare setup="$(basename "${BASH_SOURCE[0]}")"
+setup=".${setup%.*}.init"
+if [ ! -f "${workspace_dir}/$setup" ]; then
+    # perform initialization 
+    touch "${workspace_dir}/$setup"
+fi
+
+# perform common
+
+
 sudo sysctl -w vm.max_map_count=262144
-
-[ -f ${workspace_dir}/.elasticsearch.init ] && exit 0 
-touch ${workspace_dir}/.elasticsearch.init
-
-cp ${config_dir}/elasticsearch/elasticsearch.yml ${workspace_dir}/elasticsearch
+sudo cp -r ${config_dir}/elasticsearch ${workspace_dir}/

@@ -1,10 +1,9 @@
-
-output {
-  elasticsearch { 
-    hosts => ["elasticsearch:9200"] 
-  }
-}
-
+output.elasticsearch: 
+  hosts: ["elasticsearch:9200"] 
+ 
 setup.kibana:
   host: "kibana:5601"
-  
+
+journalbeat.inputs:
+- paths: ["/host/journal", "/host/journal/*"]
+  seek: head

@@ -1,14 +1,11 @@
 
-output {
-  elasticsearch { 
-    hosts => ["elasticsearch:9200"] 
-  }
-}
+output.elasticsearch: 
+  hosts: ["elasticsearch:9200"] 
 
 setup.kibana:
   host: "kibana:5601"
 
 metricbeat.autodiscover:
   providers:
-     - type: docker
-       hints.enabled: true
+    - type: docker
+      hints.enabled: true
