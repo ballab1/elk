@@ -9,7 +9,7 @@ services:
             ES_JAVA_OPTS: "-Xms512m -Xmx512m"
             discovery.type: single-node
         hostname: elasticsearch
-        image: ${DOCKER_REGISTRY:-ubuntu-s2:5000/}elasticsearch:${ELASTICSEARCH_VERSION:-7.3.0}
+        image: ${DOCKER_REGISTRY:-ubuntu-s2:5000/}thirdparty/elasticsearch:${ELASTICSEARCH_VERSION:-7.3.0}
         labels:
             co.elastic.metrics/hosts: '$${data.host}:$${data.port}'
             co.elastic.metrics/metricsets: status
@@ -38,7 +38,7 @@ services:
         environment:
             setup.kibana.host: kibana:5601
         hostname: filebeat
-        image: ${DOCKER_REGISTRY:-ubuntu-s2:5000/}filebeat:${FILEBEAT_VERSION:-7.3.0}
+        image: ${DOCKER_REGISTRY:-ubuntu-s2:5000/}thirdparty/filebeat:${FILEBEAT_VERSION:-7.3.0}
         labels:
             co.elastic.metrics/hosts: '$${data.host}:$${data.port}'
             co.elastic.metrics/metricsets: status
@@ -64,7 +64,7 @@ services:
     journalbeat:
         container_name: journalbeat
         hostname: journalbeat
-        image: ${DOCKER_REGISTRY:-ubuntu-s2:5000/}journalbeat:${JOURNALBEAT_VERSION:-7.3.0}
+        image: ${DOCKER_REGISTRY:-ubuntu-s2:5000/}thirdparty/journalbeat:${JOURNALBEAT_VERSION:-7.3.0}
         labels:
             co.elastic.metrics/hosts: '$${data.host}:$${data.port}'
             co.elastic.metrics/metricsets: status
@@ -90,7 +90,7 @@ services:
             ELASTICSEARCH_HOSTS: http://elasticsearch:9200
             SERVER_NAME: kibana
         hostname: kibana
-        image: ${DOCKER_REGISTRY:-ubuntu-s2:5000/}kibana:${KIBANA_VERSION:-7.3.0}
+        image: ${DOCKER_REGISTRY:-ubuntu-s2:5000/}thirdparty/kibana:${KIBANA_VERSION:-7.3.0}
         labels:
             co.elastic.metrics/hosts: '$${data.host}:$${data.port}'
             co.elastic.metrics/metricsets: status
@@ -113,7 +113,7 @@ services:
     logstash:
         container_name: logstash
         hostname: logstash
-        image: ${DOCKER_REGISTRY:-ubuntu-s2:5000/}logstash:${LOGSTASH_VERSION:-7.3.0}
+        image: ${DOCKER_REGISTRY:-ubuntu-s2:5000/}thirdparty/logstash:${LOGSTASH_VERSION:-7.3.0}
         labels:
             co.elastic.metrics/hosts: '$${data.host}:$${data.port}'
             co.elastic.metrics/metricsets: status
@@ -136,7 +136,7 @@ services:
     metricbeat:
         container_name: metricbeat
         hostname: metricbeat
-        image: ${DOCKER_REGISTRY:-ubuntu-s2:5000/}metricbeat:${METRICBEAT_VERSION:-7.3.0}
+        image: ${DOCKER_REGISTRY:-ubuntu-s2:5000/}thirdparty/metricbeat:${METRICBEAT_VERSION:-7.3.0}
         labels:
             co.elastic.metrics/hosts: '$${data.host}:$${data.port}'
             co.elastic.metrics/metricsets: status
