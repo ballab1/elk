@@ -6,17 +6,16 @@
 #
 #############################################################################
 
-declare -r config_dir=${CONFIG_DIR:?}
-declare -r workspace_dir=${WORKSPACE_DIR:?} 
+declare -r config_dir="${CONFIG_DIR:?}/logstash"
+declare -r workspace_dir="${WORKSPACE_DIR:?}/logstash"
 
 declare setup="$(basename "${BASH_SOURCE[0]}")"
 setup=".${setup%.*}.init"
-if [ ! -f "${workspace_dir}/$setup" ]; then
+if [ ! -f "${WORKSPACE_DIR}/$setup" ]; then
     # perform initialization 
-    touch "${workspace_dir}/$setup"
+    touch "${WORKSPACE_DIR}/$setup"
 fi
 
 # perform common
 
-
-sudo cp -r ${config_dir}/logstash ${workspace_dir}/
+sudo cp -r "${config_dir}" "${WORKSPACE_DIR}/"

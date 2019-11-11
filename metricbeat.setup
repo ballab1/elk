@@ -6,18 +6,19 @@
 #
 #############################################################################
 
-declare -r config_dir=${CONFIG_DIR:?}
-declare -r workspace_dir=${WORKSPACE_DIR:?} 
+declare -r config_dir="${CONFIG_DIR:?}/metricbeat"
+declare -r workspace_dir="${WORKSPACE_DIR:?}/metricbeat"
 
 declare setup="$(basename "${BASH_SOURCE[0]}")"
 setup=".${setup%.*}.init"
-if [ ! -f "${workspace_dir}/$setup" ]; then
+if [ ! -f "${WORKSPACE_DIR}/$setup" ]; then
     # perform initialization 
-    touch "${workspace_dir}/$setup"
+    touch "${WORKSPACE_DIR}/$setup"
 fi
 
 # perform common
 
-#sudo chown root:root -R "${workspace_dir}/metricbeat"/*
-sudo chmod 644 -R "${workspace_dir}/metricbeat"/*
-sudo cp -r ${config_dir}/metricbeat ${workspace_dir}/
+sudo cp -r "${config_dir}" "${WORKSPACE_DIR}/"
+
+#sudo chown root:root -R "${workspace_dir}"/*
+sudo chmod 644 -R "${workspace_dir}/"/*
