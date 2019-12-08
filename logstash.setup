@@ -19,3 +19,4 @@ fi
 # perform common
 
 sudo cp -r "${config_dir}" "${WORKSPACE_DIR}/"
+sudo chown -R $EUID:$(getent passwd $EUID|cut -d ':' -f 4) "$workspace_dir"

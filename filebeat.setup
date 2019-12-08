@@ -19,3 +19,8 @@ fi
 # perform common
 
 sudo cp -r "${config_dir}" "${WORKSPACE_DIR}/"
+sudo chown -R $EUID:$(getent passwd $EUID|cut -d ':' -f 4) "$workspace_dir"
+
+# there is an issue accessing /var/run/docker.sock.
+#  - unable to add 'filebeat' user to 'docker' group because each exist in different namespaces
+#  - to solve, chmod 666 /var/run/docker.sock

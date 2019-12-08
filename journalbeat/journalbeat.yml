@@ -5,5 +5,5 @@ setup.kibana:
   host: "kibana:5601"
 
 journalbeat.inputs:
-- paths: ["/host/journal", "/host/journal/*"]
+- paths: ["/host/journal/d8deea406ba84f578660c3c1fce7cb20/system.journal"]
   seek: head

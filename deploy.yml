@@ -1,0 +1,21 @@
+completion_msg:
+    - "To access Kibana, please open the following URL in your browser: http://${HOST_IP}:5601"
+
+container_os: elk
+
+environment:
+    LOCATION: home 
+
+skip_wait:
+    - elasticsearch
+    - filebeat
+    - journalbeat
+    - kibana
+    - logstash
+    - metricbeat 
+
+versions:
+    repo: https://github.com/ballab1/versions
+    dir: ${WORKSPACE_DIR}/.versions
+    commit: e757c7961356cdb05f7965523f361a406a55b277
+    branch: master
