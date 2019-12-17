@@ -9,3 +9,10 @@ metricbeat.autodiscover:
   providers:
     - type: docker
       hints.enabled: true
+
+metricbeat.modules:
+- module: kafka
+  metricsets: ["consumergroup", "partition"]
+  period: 10s
+  hosts: ["10.1.3.6:9092", "10.1.3.10:9092"]
+  enabled: true
