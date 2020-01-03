@@ -2,12 +2,12 @@
 
 #############################################################################
 #
-#   initialization for filebeat
+#   initialization for auditbeat
 #
 #############################################################################
 
-declare -r config_dir="${CONFIG_DIR:?}/filebeat"
-declare -r workspace_dir="${WORKSPACE_DIR:?}/filebeat"
+declare -r config_dir="${CONFIG_DIR:?}/auditbeat"
+declare -r workspace_dir="${WORKSPACE_DIR:?}/auditbeat"
 
 declare isIinitialized="$(basename "${BASH_SOURCE[0]}")"
 isIinitialized="${workspace_dir}/.${isIinitialized%.*}.init"
@@ -21,12 +21,11 @@ fi
 
 # perform common
 
-sudo rm -rf "${workspace_dir}/modules.d"
-sudo cp -r "${config_dir}/modules.d" "${config_dir}/filebeat.yml" "${workspace_dir}/"
-sudo chown -R $EUID:$(getent passwd $EUID|cut -d ':' -f 4) "$workspace_dir"
+sudo rm -rf "${workspace_dir}/audit.rules.d"
+sudo cp -r "${config_dir}/audit.rules.d" "${config_dir}/auditbeat.yml" "${workspace_dir}/"
+sudo chown -R root "$workspace_dir"
 sudo chmod -R a+r "${workspace_dir}"
-sudo chmod a+rw /run/docker.sock
 
 # there is an issue accessing /var/run/docker.sock.
-#  - unable to add 'filebeat' user to 'docker' group because each exist in different namespaces
+#  - unable to add 'auditbeat' user to 'docker' group because each exist in different namespaces
 #  - to solve, chmod 666 /var/run/docker.sock

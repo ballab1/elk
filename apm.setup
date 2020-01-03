@@ -2,12 +2,12 @@
 
 #############################################################################
 #
-#   initialization for metricbeat
+#   initialization for auditbeat
 #
 #############################################################################
 
-declare -r config_dir="${CONFIG_DIR:?}/metricbeat"
-declare -r workspace_dir="${WORKSPACE_DIR:?}/metricbeat"
+declare -r config_dir="${CONFIG_DIR:?}/auditbeat"
+declare -r workspace_dir="${WORKSPACE_DIR:?}/auditbeat"
 
 declare isIinitialized="$(basename "${BASH_SOURCE[0]}")"
 isIinitialized="${workspace_dir}/.${isIinitialized%.*}.init"
@@ -17,14 +17,12 @@ if [ ! -f "$isIinitialized" ]; then
     mkdir -p "$workspace_dir" ||: 
 
     touch "$isIinitialized"
-fi
+fi 
+
 
 # perform common
 
-sudo rm -rf "${WORKSPACE_DIR}/modules.d"
+sudo rm -rf "${workspace_dir}/audit.rules.d"
 sudo cp -r "${config_dir}" "${WORKSPACE_DIR}/"
 sudo chown -R $EUID:$(getent passwd $EUID|cut -d ':' -f 4) "$workspace_dir"
-
-# Exiting: error loading config file: config file ("metricbeat.yml") must be owned by the user identifier (uid=0) or root
-sudo chown root -R "${workspace_dir}"/*
 sudo chmod -R a+r "${workspace_dir}"

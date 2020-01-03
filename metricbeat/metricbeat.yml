@@ -16,3 +16,9 @@ metricbeat.modules:
   period: 10s
   hosts: ["10.1.3.6:9092", "10.1.3.10:9092"]
   enabled: true
+
+metricbeat.config:
+  modules:
+    path: ${path.config}/modules.d/*.yml
+    reload.enabled: false
+ 

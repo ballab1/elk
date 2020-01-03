@@ -7,6 +7,8 @@ environment:
     LOCATION: home 
 
 skip_wait:
+    - apm
+    - auditbeat
     - elasticsearch
     - filebeat
     - journalbeat
@@ -17,5 +19,5 @@ skip_wait:
 versions:
     repo: https://github.com/ballab1/versions
     dir: ${WORKSPACE_DIR}/.versions
-    commit: e757c7961356cdb05f7965523f361a406a55b277
+    commit: 589bd45dce67db2e0d62cca31e9ec12acb4093bf
     branch: master

@@ -11,7 +11,7 @@ pipeline {
     timestamps()
   }
   parameters {
-    string(name: 'CONTAINER_TAG', defaultValue: '7.4.0', description: 'version of ELK stack to use')
+    string(name: 'CONTAINER_TAG', defaultValue: '7.5.0', description: 'version of ELK stack to use')
     string(name: 'SLAVE', defaultValue: 'ubuntu-s6', description: 'label of slave on which ELK stack should run')
     string(name: 'TARGET_DIR', defaultValue: '/home/bobb/elk-deploy', description: 'target directory for config files')
   }

@@ -9,14 +9,18 @@
 declare -r config_dir="${CONFIG_DIR:?}/logstash"
 declare -r workspace_dir="${WORKSPACE_DIR:?}/logstash"
 
-declare setup="$(basename "${BASH_SOURCE[0]}")"
-setup=".${setup%.*}.init"
-if [ ! -f "${WORKSPACE_DIR}/$setup" ]; then
+declare isIinitialized="$(basename "${BASH_SOURCE[0]}")"
+isIinitialized="${workspace_dir}/.${isIinitialized%.*}.init"
+if [ ! -f "$isIinitialized" ]; then
+
     # perform initialization 
-    touch "${WORKSPACE_DIR}/$setup"
+    mkdir -p "$workspace_dir" ||: 
+
+    touch "$isIinitialized"
 fi
 
 # perform common
 
 sudo cp -r "${config_dir}" "${WORKSPACE_DIR}/"
 sudo chown -R $EUID:$(getent passwd $EUID|cut -d ':' -f 4) "$workspace_dir"
+sudo chmod -R a+r "${workspace_dir}"
