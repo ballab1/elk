@@ -1,6 +1,6 @@
 #!/bin/bash
 
-declare version=${1:-7.5.1}
+declare version=${1:-7.5.0}
 
 function getImage()
 {

@@ -1,102 +1,13 @@
 version: '3.5'
 
 services:
-#    apm:
-#        container_name: apm
-#        environment:
-#            setup.kibana.host: kibana:5601
-#        hostname: apm
-#        image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/apm-server:${APM_VERSION:-7.5.0}
-#        labels:
-#            co.elastic.metrics/hosts: '$${data.host}:$${data.port}'
-#            co.elastic.metrics/metricsets: status
-#            co.elastic.metrics/module: apm
-#            co.elastic.metrics/period: 10s
-#        links:
-#            - elasticsearch:elasticsearch
-#            - kibana:kibana
-#        logging:
-#            driver: json-file
-#            options:
-#                max-file: "3"
-#                max-size: "10m"
-#        networks:
-#            - elk-net
-#        ports:
-#            - "8200:8200"
-#        restart: unless-stopped
-#        volumes:
-#            - ./apm/apm-server.yml:/usr/share/apm-server/apm-server.yml:ro
-#            - ./apm/log:/var/log:rw
-
-#    auditbeat:
-#        cap_add:
-#            - ALL
-#        container_name: auditbeat
-#        environment:
-#            setup.kibana.host: kibana:5601
-#        hostname: auditbeat
-#        image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/auditbeat:${AUDITBEAT_VERSION:-7.5.1}
-#        labels:
-#            co.elastic.metrics/hosts: '$${data.host}:$${data.port}'
-#            co.elastic.metrics/metricsets: status
-#            co.elastic.metrics/module: auditbeat
-#            co.elastic.metrics/period: 10s
-#        links:
-#            - elasticsearch:elasticsearch
-#            - kibana:kibana
-#        logging:
-#            driver: json-file
-#            options:
-#                max-file: "3"
-#                max-size: "10m"
-#        networks:
-#            - elk-net
-##        ports:
-##            - "8200:8200"
-#        restart: unless-stopped
-#        volumes:
-#            - ./auditbeat/auditbeat.yml:/usr/share/auditbeat/auditbeat.yml:ro
-#            - ./auditbeat/log:/var/log:rw
-       
-    elasticsearch:
-        container_name: elasticsearch
-        environment:
-            cluster.name: 'docker-cluster'
-            bootstrap.memory_lock: 'true'
-            ES_JAVA_OPTS: "-Xms512m -Xmx512m"
-            discovery.type: single-node
-        hostname: elasticsearch
-        image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/elasticsearch:${ELASTICSEARCH_VERSION:-7.5.1}
-        labels:
-            co.elastic.metrics/hosts: '$${data.host}:$${data.port}'
-            co.elastic.metrics/metricsets: status
-            co.elastic.metrics/module: elasticsearch
-            co.elastic.metrics/period: 10s
-        logging:
-            driver: json-file
-            options:
-                max-file: "3"
-                max-size: "10m"
-        networks:
-            - elk-net
-        ports:
-            - "9200:9200"
-            - "9300:9300"
-        restart: unless-stopped
-        ulimits:
-            memlock:
-                soft: -1
-                hard: -1
-        volumes:
-            - ./elasticsearch/data:/usr/share/elasticsearch/data
-            - ./elasticsearch/log:/var/log
-
-
     filebeat:
         container_name: filebeat
         environment:
             setup.kibana.host: kibana:5601
+        extra_hosts:
+            - "elasticsearch:10.1.3.15"
+            - "kibana:10.1.3.15"
         hostname: filebeat
         image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/filebeat:${FILEBEAT_VERSION:-7.5.1}
         labels:
@@ -128,6 +39,9 @@ services:
 #        stdin_open: true
 #        tty: true
         container_name: journalbeat
+        extra_hosts:
+            - "elasticsearch:10.1.3.15"
+            - "kibana:10.1.3.15"
         hostname: journalbeat
         image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/journalbeat:${JOURNALBEAT_VERSION:-7.5.1}
         labels:
@@ -152,36 +66,11 @@ services:
             - ./journalbeat/log:/var/log:rw
         user: root
 
-    kibana:
-        container_name: kibana
-        environment:
-            ELASTICSEARCH_HOSTS: http://elasticsearch:9200
-            SERVER_NAME: kibana
-        hostname: kibana
-        image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/kibana:${KIBANA_VERSION:-7.5.1}
-        labels:
-            co.elastic.metrics/hosts: '$${data.host}:$${data.port}'
-            co.elastic.metrics/metricsets: status
-            co.elastic.metrics/module: kibana
-            co.elastic.metrics/period: 10s
-        links:
-            - elasticsearch:elasticsearch
-        logging:
-            driver: json-file
-            options:
-                max-file: "3"
-                max-size: "10m"
-        networks:
-            - elk-net
-        ports:
-            - "5601:5601"
-        restart: unless-stopped
-        volumes:
-            - ./kibana/kibana.yml:/etc/kibana/config/kibana.yml:ro
-            - ./kibana/log:/var/log
-
     logstash:
         container_name: logstash
+        extra_hosts:
+            - "elasticsearch:10.1.3.15"
+            - "kibana:10.1.3.15"
         hostname: logstash
         image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/logstash:${LOGSTASH_VERSION:-7.5.1}
         labels:
@@ -207,6 +96,9 @@ services:
 
     metricbeat:
         container_name: metricbeat
+        extra_hosts:
+            - "elasticsearch:10.1.3.15"
+            - "kibana:10.1.3.15"
         hostname: metricbeat
         image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/metricbeat:${METRICBEAT_VERSION:-7.5.1}
         labels:
