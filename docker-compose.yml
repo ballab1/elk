@@ -3,9 +3,13 @@ version: '3.5'
 services:
 #    apm:
 #        container_name: apm
+#        dns: 10.1.3.1
+#        dns_search:
+#            - ubuntu.home
+#            - home
 #        environment:
 #            setup.kibana.host: kibana:5601
-#        hostname: apm
+#        hostname: apm.s6.home
 #        image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/apm-server:${APM_VERSION:-7.5.0}
 #        labels:
 #            co.elastic.metrics/hosts: '$${data.host}:$${data.port}'
@@ -33,9 +37,13 @@ services:
 #        cap_add:
 #            - ALL
 #        container_name: auditbeat
+#        dns: 10.1.3.1
+#        dns_search:
+#            - ubuntu.home
+#            - home
 #        environment:
 #            setup.kibana.host: kibana:5601
-#        hostname: auditbeat
+#        hostname: auditbeat.s6.home
 #        image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/auditbeat:${AUDITBEAT_VERSION:-7.5.1}
 #        labels:
 #            co.elastic.metrics/hosts: '$${data.host}:$${data.port}'
@@ -61,12 +69,16 @@ services:
        
     elasticsearch:
         container_name: elasticsearch
+        dns: 10.1.3.1
+        dns_search:
+            - ubuntu.home
+            - home
         environment:
             cluster.name: 'docker-cluster'
             bootstrap.memory_lock: 'true'
             ES_JAVA_OPTS: "-Xms512m -Xmx512m"
             discovery.type: single-node
-        hostname: elasticsearch
+        hostname: elasticsearch.s6.home
         image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/elasticsearch:${ELASTICSEARCH_VERSION:-7.5.1}
         labels:
             co.elastic.metrics/hosts: '$${data.host}:$${data.port}'
@@ -95,9 +107,13 @@ services:
 
     filebeat:
         container_name: filebeat
+        dns: 10.1.3.1
+        dns_search:
+            - ubuntu.home
+            - home
         environment:
             setup.kibana.host: kibana:5601
-        hostname: filebeat
+        hostname: filebeat.s6.home
         image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/filebeat:${FILEBEAT_VERSION:-7.5.1}
         labels:
             co.elastic.metrics/hosts: '$${data.host}:$${data.port}'
@@ -124,11 +140,15 @@ services:
             - /var/log:/hostfs/var/log:ro
 
     journalbeat:
+        container_name: journalbeat
+        dns: 10.1.3.1
+        dns_search:
+            - ubuntu.home
+            - home
 #        entrypoint: /bin/cat
 #        stdin_open: true
 #        tty: true
-        container_name: journalbeat
-        hostname: journalbeat
+        hostname: journalbeat.s6.home
         image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/journalbeat:${JOURNALBEAT_VERSION:-7.5.1}
         labels:
             co.elastic.metrics/hosts: '$${data.host}:$${data.port}'
@@ -154,10 +174,14 @@ services:
 
     kibana:
         container_name: kibana
+        dns: 10.1.3.1
+        dns_search:
+            - ubuntu.home
+            - home
         environment:
             ELASTICSEARCH_HOSTS: http://elasticsearch:9200
             SERVER_NAME: kibana
-        hostname: kibana
+        hostname: kibana.s6.home
         image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/kibana:${KIBANA_VERSION:-7.5.1}
         labels:
             co.elastic.metrics/hosts: '$${data.host}:$${data.port}'
@@ -182,7 +206,11 @@ services:
 
     logstash:
         container_name: logstash
-        hostname: logstash
+        dns: 10.1.3.1
+        dns_search:
+            - ubuntu.home
+            - home
+        hostname: logstash.s6.home
         image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/logstash:${LOGSTASH_VERSION:-7.5.1}
         labels:
             co.elastic.metrics/hosts: '$${data.host}:$${data.port}'
@@ -207,7 +235,11 @@ services:
 
     metricbeat:
         container_name: metricbeat
-        hostname: metricbeat
+        dns: 10.1.3.1
+        dns_search:
+            - ubuntu.home
+            - home
+        hostname: metricbeat.s6.home
         image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/metricbeat:${METRICBEAT_VERSION:-7.5.1}
         labels:
             co.elastic.metrics/hosts: '$${data.host}:$${data.port}'
