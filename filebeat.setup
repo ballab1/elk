@@ -23,7 +23,7 @@ fi
 
 sudo rm -rf "${workspace_dir}/modules.d"
 sudo cp -r "${config_dir}/modules.d" "${config_dir}/filebeat.yml" "${workspace_dir}/"
-sudo chown -R $EUID:$(getent passwd $EUID|cut -d ':' -f 4) "$workspace_dir"
+sudo chown -R $ELKID:$(id -g) "$workspace_dir"
 sudo chmod -R a+r "${workspace_dir}"
 sudo chmod a+rw /run/docker.sock
 
