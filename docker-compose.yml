@@ -1,13 +1,84 @@
 version: '3.5'
 
 services:
+#    apm:
+#        container_name: apm
+#        dns: 10.1.3.1
+#        dns_search:
+#            - ubuntu.home
+#            - home
+#        environment:
+#            setup.kibana.host: kibana:5601
+#        extra_hosts:
+#            - "elasticsearch:s6.ubuntu.home"
+#            - "kibana:s6.ubuntu.home"
+#        hostname: apm.s6.home
+#        image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/apm-server:${APM_VERSION:-7.5.0}
+#        labels:
+#            co.elastic.metrics/hosts: '$${data.host}:$${data.port}'
+#            co.elastic.metrics/metricsets: status
+#            co.elastic.metrics/module: apm
+#            co.elastic.metrics/period: 10s
+#        logging:
+#            driver: json-file
+#            options:
+#                max-file: "3"
+#                max-size: "10m"
+#        networks:
+#            - elk-net
+#        ports:
+#            - "8200:8200"
+#        restart: unless-stopped
+#        volumes:
+#            - ./apm/apm-server.yml:/usr/share/apm-server/apm-server.yml:ro
+#            - ./apm/log:/var/log:rw
+
+#    auditbeat:
+#        cap_add:
+#            - ALL
+#        container_name: auditbeat
+#        dns: 10.1.3.1
+#        dns_search:
+#            - ubuntu.home
+#            - home
+#        environment:
+#            setup.kibana.host: kibana:5601
+#        extra_hosts:
+#            - "elasticsearch:s6.ubuntu.home"
+#            - "kibana:s6.ubuntu.home"
+#        hostname: auditbeat
+#        image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/auditbeat:${AUDITBEAT_VERSION:-7.5.1}
+#        labels:
+#            co.elastic.metrics/hosts: '$${data.host}:$${data.port}'
+#            co.elastic.metrics/metricsets: status
+#            co.elastic.metrics/module: auditbeat
+#            co.elastic.metrics/period: 10s
+#        logging:
+#            driver: json-file
+#            options:
+#                max-file: "3"
+#                max-size: "10m"
+#        networks:
+#            - elk-net
+##        ports:
+##            - "8200:8200"
+#        restart: unless-stopped
+#        volumes:
+#            - ./auditbeat/auditbeat.yml:/usr/share/auditbeat/auditbeat.yml:ro
+#            - ./auditbeat/log:/var/log:rw
+       
+
     filebeat:
         container_name: filebeat
+        dns: 10.1.3.1
+        dns_search:
+            - ubuntu.home
+            - home
         environment:
             setup.kibana.host: kibana:5601
         extra_hosts:
-            - "elasticsearch:10.1.3.15"
-            - "kibana:10.1.3.15"
+            - "elasticsearch:s6.ubuntu.home"
+            - "kibana:s6.ubuntu.home"
         hostname: filebeat
         image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/filebeat:${FILEBEAT_VERSION:-7.5.1}
         labels:
@@ -15,9 +86,6 @@ services:
             co.elastic.metrics/metricsets: status
             co.elastic.metrics/module: filebeat
             co.elastic.metrics/period: 10s
-        links:
-            - elasticsearch:elasticsearch
-            - kibana:kibana
         logging:
             driver: json-file
             options:
@@ -35,13 +103,18 @@ services:
             - /var/log:/hostfs/var/log:ro
 
     journalbeat:
+        container_name: journalbeat
+        dns: 10.1.3.1
+        dns_search:
+            - ubuntu.home
+            - home
 #        entrypoint: /bin/cat
 #        stdin_open: true
 #        tty: true
         container_name: journalbeat
         extra_hosts:
-            - "elasticsearch:10.1.3.15"
-            - "kibana:10.1.3.15"
+            - "elasticsearch:s6.ubuntu.home"
+            - "kibana:s6.ubuntu.home"
         hostname: journalbeat
         image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/journalbeat:${JOURNALBEAT_VERSION:-7.5.1}
         labels:
@@ -49,9 +122,6 @@ services:
             co.elastic.metrics/metricsets: status
             co.elastic.metrics/module: journalbeat
             co.elastic.metrics/period: 10s
-        links:
-            - elasticsearch:elasticsearch
-            - kibana:kibana
         logging:
             driver: json-file
             options:
@@ -68,9 +138,13 @@ services:
 
     logstash:
         container_name: logstash
+        dns: 10.1.3.1
+        dns_search:
+            - ubuntu.home
+            - home
         extra_hosts:
-            - "elasticsearch:10.1.3.15"
-            - "kibana:10.1.3.15"
+            - "elasticsearch:s6.ubuntu.home"
+            - "kibana:s6.ubuntu.home"
         hostname: logstash
         image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/logstash:${LOGSTASH_VERSION:-7.5.1}
         labels:
@@ -78,9 +152,6 @@ services:
             co.elastic.metrics/metricsets: status
             co.elastic.metrics/module: logstash
             co.elastic.metrics/period: 10s
-        links:
-            - elasticsearch:elasticsearch
-            - kibana:kibana
         logging:
             driver: json-file
             options:
@@ -96,9 +167,13 @@ services:
 
     metricbeat:
         container_name: metricbeat
+        dns: 10.1.3.1
+        dns_search:
+            - ubuntu.home
+            - home
         extra_hosts:
-            - "elasticsearch:10.1.3.15"
-            - "kibana:10.1.3.15"
+            - "elasticsearch:s6.ubuntu.home"
+            - "kibana:s6.ubuntu.home"
         hostname: metricbeat
         image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/metricbeat:${METRICBEAT_VERSION:-7.5.1}
         labels:
@@ -106,9 +181,6 @@ services:
             co.elastic.metrics/metricsets: status
             co.elastic.metrics/module: metricbeat
             co.elastic.metrics/period: 10s
-        links:
-            - elasticsearch:elasticsearch
-            - kibana:kibana
         logging:
             driver: json-file
             options:
