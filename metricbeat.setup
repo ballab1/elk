@@ -23,7 +23,7 @@ fi
 
 sudo rm -rf "${WORKSPACE_DIR}/modules.d"
 sudo cp -r "${config_dir}" "${WORKSPACE_DIR}/"
-sudo chown -R $EUID:$(getent passwd $EUID|cut -d ':' -f 4) "$workspace_dir"
+sudo chown -R $ELKID:$(id -g) "$workspace_dir"
 
 # Exiting: error loading config file: config file ("metricbeat.yml") must be owned by the user identifier (uid=0) or root
 sudo chown root -R "${workspace_dir}"/*
