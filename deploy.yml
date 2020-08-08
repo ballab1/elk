@@ -7,7 +7,7 @@ environment:
     ELKID: '1000'
 
 thirdparty_versions:
-    ELK_VERSION: 7.8.0
+    ELK_VERSION: 7.8.1
     APM_VERSION: ${ELK_VERSION}
     AUDITBEAT_VERSION: ${ELK_VERSION}
     ELASTICSEARCH_VERSION: ${ELK_VERSION}
@@ -23,5 +23,5 @@ thirdparty_versions:
 versions:
     repo: https://github.com/ballab1/versions
     dir: ${WORKSPACE_DIR}/.versions
-    commit: 6b59221372cc341981aea0eac470d6db50b32abe
+    commit: 16d8823ceae9a39071d5d7600764ac32c04bb35a
     branch: master
