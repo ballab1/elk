@@ -3,7 +3,7 @@ version: '3.5'
 services:
 #    apm:
 #        container_name: apm
-#        dns: 10.1.3.1
+#        dns: 10.3.1.1
 #        dns_search:
 #            - ubuntu.home
 #            - home
@@ -37,7 +37,7 @@ services:
 #        cap_add:
 #            - ALL
 #        container_name: auditbeat
-#        dns: 10.1.3.1
+#        dns: 10.3.1.1
 #        dns_search:
 #            - ubuntu.home
 #            - home
@@ -69,7 +69,7 @@ services:
        
     elasticsearch:
         container_name: elasticsearch
-        dns: 10.1.3.1
+        dns: 10.3.1.1
         dns_search:
             - ubuntu.home
             - home
@@ -107,7 +107,7 @@ services:
 
     filebeat:
         container_name: filebeat
-        dns: 10.1.3.1
+        dns: 10.3.1.1
         dns_search:
             - ubuntu.home
             - home
@@ -141,7 +141,7 @@ services:
 
     journalbeat:
         container_name: journalbeat
-        dns: 10.1.3.1
+        dns: 10.3.1.1
         dns_search:
             - ubuntu.home
             - home
@@ -174,7 +174,7 @@ services:
 
     kibana:
         container_name: kibana
-        dns: 10.1.3.1
+        dns: 10.3.1.1
         dns_search:
             - ubuntu.home
             - home
@@ -206,7 +206,7 @@ services:
 
     logstash:
         container_name: logstash
-        dns: 10.1.3.1
+        dns: 10.3.1.1
         dns_search:
             - ubuntu.home
             - home
@@ -235,7 +235,7 @@ services:
 
     metricbeat:
         container_name: metricbeat
-        dns: 10.1.3.1
+        dns: 10.3.1.1
         dns_search:
             - ubuntu.home
             - home

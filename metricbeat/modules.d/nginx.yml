@@ -7,7 +7,7 @@
   period: 10s
 
   # Nginx hosts
-  hosts: ["https://10.1.3.6"]
+  hosts: ["https://10.3.1.6"]
 
   # Path to server status. Default server-status
   server_status_path: "nginx_status"
