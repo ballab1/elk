@@ -9,7 +9,7 @@ services:
 #            - home
 #        environment:
 #            setup.kibana.host: kibana:5601
-#        hostname: apm.s6.home
+#        hostname: apm
 #        image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/apm-server:${APM_VERSION:-7.5.0}
 #        labels:
 #            co.elastic.metrics/hosts: '$${data.host}:$${data.port}'
@@ -43,7 +43,7 @@ services:
 #            - home
 #        environment:
 #            setup.kibana.host: kibana:5601
-#        hostname: auditbeat.s6.home
+#        hostname: auditbeat
 #        image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/auditbeat:${AUDITBEAT_VERSION:-7.5.1}
 #        labels:
 #            co.elastic.metrics/hosts: '$${data.host}:$${data.port}'
@@ -78,7 +78,7 @@ services:
             bootstrap.memory_lock: 'true'
             ES_JAVA_OPTS: "-Xms512m -Xmx512m"
             discovery.type: single-node
-        hostname: elasticsearch.s6.home
+        hostname: elasticsearch
         image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/elasticsearch:${ELASTICSEARCH_VERSION:-7.9.2}
         labels:
             co.elastic.metrics/hosts: '$${data.host}:$${data.port}'
@@ -113,7 +113,7 @@ services:
             - home
         environment:
             setup.kibana.host: kibana:5601
-        hostname: filebeat.s6.home
+        hostname: filebeat
         image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/filebeat:${FILEBEAT_VERSION:-7.9.2}
         labels:
             co.elastic.metrics/hosts: '$${data.host}:$${data.port}'
@@ -148,7 +148,7 @@ services:
 #        entrypoint: /bin/cat
 #        stdin_open: true
 #        tty: true
-        hostname: journalbeat.s6.home
+        hostname: journalbeat
         image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/journalbeat:${JOURNALBEAT_VERSION:-7.9.2}
         labels:
             co.elastic.metrics/hosts: '$${data.host}:$${data.port}'
@@ -181,7 +181,7 @@ services:
         environment:
             ELASTICSEARCH_HOSTS: http://elasticsearch:9200
             SERVER_NAME: kibana
-        hostname: kibana.s6.home
+        hostname: kibana
         image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/kibana:${KIBANA_VERSION:-7.9.2}
         labels:
             co.elastic.metrics/hosts: '$${data.host}:$${data.port}'
@@ -206,11 +206,12 @@ services:
 
     logstash:
         container_name: logstash
+#        command: "logstash -r -f /usr/share/logstash/config/logstash.yml"
         dns: 10.3.1.1
         dns_search:
             - ubuntu.home
             - home
-        hostname: logstash.s6.home
+        hostname: logstash
         image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/logstash:${LOGSTASH_VERSION:-7.9.2}
         labels:
             co.elastic.metrics/hosts: '$${data.host}:$${data.port}'
@@ -227,10 +228,13 @@ services:
                 max-size: "10m"
         networks:
             - elk-net
+        ports:
+            - "514:5514"
+            - "514:5514/udp"
         restart: unless-stopped
         volumes:
-            - ./logstash/logstash.yml:/etc/logstash/logstash.yml:ro
-            - ./logstash/pipeline/:/etc/logstash/pipeline/
+            - ./logstash/config/:/usr/share/logstash/config
+            - ./logstash/pipelines:/usr/share/logstash/pipelines
             - ./logstash/log:/var/log
 
     metricbeat:
@@ -239,7 +243,7 @@ services:
         dns_search:
             - ubuntu.home
             - home
-        hostname: metricbeat.s6.home
+        hostname: metricbeat
         image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/metricbeat:${METRICBEAT_VERSION:-7.9.2}
         labels:
             co.elastic.metrics/hosts: '$${data.host}:$${data.port}'

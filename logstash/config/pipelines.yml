@@ -1,0 +1,11 @@
+# This file is where you define your pipelines. You can define multiple.
+# For more information on multiple pipelines, see the documentation:
+#   https://www.elastic.co/guide/en/logstash/current/multiple-pipelines.html
+
+- pipeline.id: syslog-pipeline
+  path.config: "/usr/share/logstash/pipelines/syslog.conf"
+  pipeline.workers: 3
+- pipeline.id: beats-pipeline
+  path.config: "/usr/share/logstash/pipelines/beats.conf"
+  pipeline.workers: 3
+  

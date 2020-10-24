@@ -1,0 +1,12 @@
+
+setup.kibana.host: "kibana:5601"
+
+#config.reload.automatic: true
+#config.reload.interval: 5s
+#config.debug: trace
+
+#modules:
+#  - name: syslog
+
+#log.level: trace
+#log.format: json

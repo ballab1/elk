@@ -76,3 +76,9 @@
 
 # Entropy source for randomness
 -Djava.security.egd=file:/dev/urandom
+
+#--add-opens=java.base/java.security=ALL-UNNAMED
+#--add-opens=java.base/java.io=ALL-UNNAMED
+#--add-opens=java.base/java.nio.channels=org.jruby.dist
+#--add-opens=java.base/sun.nio.ch=org.jruby.dist
+#--add-opens=java.management/sun.management=org.jruby.dist
