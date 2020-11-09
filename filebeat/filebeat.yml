@@ -4,9 +4,6 @@ output.elasticsearch:
 setup.kibana:
   host: "kibana:5601"
 
-#output.logstash:
-#  hosts: ['logstash:5044']
-#  
 filebeat.config:
   modules:
     path: ${path.config}/modules.d/*.yml
@@ -17,11 +14,14 @@ filebeat.autodiscover:
     - type: docker
       hints.enabled: true
 
+#output.logstash:
+#  hosts: ['logstash:5044']
+#  
+
 #filebeat.prospectors:
 #- input_type: log
 #  paths:
 #    - /hostfs/var/log
-
 
 #filebeat.prospectors:
 #    - paths:
