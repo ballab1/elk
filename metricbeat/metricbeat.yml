@@ -1,4 +1,4 @@
-logging.level: debug
+#logging.level: debug
 
 output.elasticsearch: 
   hosts: ["elasticsearch:9200"] 

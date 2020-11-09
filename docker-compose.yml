@@ -231,6 +231,7 @@ services:
         ports:
             - "514:5514"
             - "514:5514/udp"
+            - "9600:9600"
         restart: unless-stopped
         volumes:
             - ./logstash/config/:/usr/share/logstash/config

@@ -10,3 +10,7 @@
 
 #log.level: trace
 #log.format: json
+
+monitoring.enabled: true
+xpack.management.enabled: false
+xpack.monitoring.enabled: false
