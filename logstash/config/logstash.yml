@@ -12,8 +12,9 @@
 #log.format: json
 
 monitoring.enabled: true
-monitoring.elasticsearch.hosts: ["http://elasticsearch:9200"]
+monitoring.elasticsearch.hosts: ['http://${ELASTICSEARCH_HOSTS:elasticsearch:9200}']
+
 #xpack.management.enabled: false
 #xpack.monitoring.enabled: false
-#xpack.management.elasticsearch.hosts: ["https://elasticsearch:9200"]
+#xpack.management.elasticsearch.hosts: ["http://elasticsearch:9200"]
 #xpack.monitoring.collection.config.enabled: true

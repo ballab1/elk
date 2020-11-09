@@ -1,11 +1,12 @@
 server.port: 5601
  
-elasticsearch.url: "http://elasticsearch:9200"
+elasticsearch.url: 'http://${ELASTICSEARCH_HOSTS:elasticsearch:9200}'
+
 
 # Default Kibana configuration for docker target
 server.name: kibana
 server.host: "0"
-elasticsearch.hosts: [ "http://elasticsearch:9200" ]
+elasticsearch.hosts: '${ELASTICSEARCH_HOSTS:elasticsearch:9200}'
 monitoring.ui.container.elasticsearch.enabled: true
 
 #enterpriseSearch.host: 'http://localhost:3002'

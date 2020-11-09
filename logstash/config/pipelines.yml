@@ -7,5 +7,8 @@
   pipeline.workers: 3
 - pipeline.id: beats-pipeline
   path.config: "/usr/share/logstash/pipelines/beats.conf"
-  pipeline.workers: 3
+  pipeline.workers: 2
+- pipeline.id: nginx_access-pipeline
+  path.config: "/usr/share/logstash/pipelines/nginx_access.conf"
+  pipeline.workers: 2
   

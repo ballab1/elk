@@ -42,7 +42,7 @@ services:
 #            - ubuntu.home
 #            - home
 #        environment:
-#            setup.kibana.host: kibana:5601
+#            SETUP_KIBANA_HOST: kibana:5601
 #        hostname: auditbeat
 #        image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/auditbeat:${AUDITBEAT_VERSION:-7.5.1}
 #        labels:
@@ -112,7 +112,7 @@ services:
             - ubuntu.home
             - home
         environment:
-            setup.kibana.host: kibana:5601
+            SETUP_KIBANA_HOST: kibana:5601
         hostname: filebeat
         image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/filebeat:${FILEBEAT_VERSION:-7.9.3}
         labels:
@@ -146,6 +146,8 @@ services:
             - ubuntu.home
             - home
 #        entrypoint: /bin/cat
+        environment:
+            SETUP_KIBANA_HOST: kibana:5601
 #        stdin_open: true
 #        tty: true
         hostname: journalbeat
@@ -212,6 +214,8 @@ services:
         dns_search:
             - ubuntu.home
             - home
+        environment:
+            SETUP_KIBANA_HOST: kibana:5601
         hostname: logstash
         image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/logstash:${LOGSTASH_VERSION:-7.9.3}
         labels:
@@ -246,6 +250,8 @@ services:
         dns_search:
             - ubuntu.home
             - home
+        environment:
+            SETUP_KIBANA_HOST: kibana:5601
         hostname: metricbeat
         image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/metricbeat:${METRICBEAT_VERSION:-7.9.3}
         labels:

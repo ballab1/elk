@@ -12,7 +12,9 @@ journalbeat.inputs:
   seek: head
 
 output.elasticsearch:
-    hosts: ["elasticsearch:9200"]
+  hosts: '${ELASTICSEARCH_HOSTS:elasticsearch:9200}'
+  username: '${ELASTICSEARCH_USERNAME:}'
+  password: '${ELASTICSEARCH_PASSWORD:}'
 #    index: "%{[@metadata][beat]}-%{[@metadata][version]}" 
 
 #output.logstash:
