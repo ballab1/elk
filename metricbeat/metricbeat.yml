@@ -1,3 +1,4 @@
+logging.level: debug
 
 output.elasticsearch: 
   hosts: ["elasticsearch:9200"] 
@@ -9,13 +10,6 @@ metricbeat.autodiscover:
   providers:
     - type: docker
       hints.enabled: true
-
-metricbeat.modules:
-- module: kafka
-  metricsets: ["consumergroup", "partition"]
-  period: 10s
-  hosts: ["10.3.1.6:9092", "10.3.1.10:9092"]
-  enabled: true
 
 metricbeat.config:
   modules:

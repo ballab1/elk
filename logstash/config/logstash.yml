@@ -1,5 +1,5 @@
 
-setup.kibana.host: "kibana:5601"
+#setup.kibana.host: "kibana:5601"
 
 #config.reload.automatic: true
 #config.reload.interval: 5s

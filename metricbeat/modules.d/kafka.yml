@@ -2,18 +2,18 @@
 # Docs: https://www.elastic.co/guide/en/beats/metricbeat/7.3/metricbeat-module-kafka.html
 
 - module: kafka
-  #metricsets:
-  #  - partition
-  #  - consumergroup
+  metricsets:
+    - partition
+    - consumergroup
   period: 10s
-  hosts: ["10.3.1.6:9092","10.3.1.10:9092"]
+  hosts: ["10.3.1.6:9092","10.3.1.10:9092","10.3.1.17:9092"]
 
-  #client_id: metricbeat
-  #retries: 3
-  #backoff: 250ms
+  client_id: metricbeat
+  retries: 3
+  backoff: 250ms
 
   # List of Topics to query metadata for. If empty, all topics will be queried.
-  #topics: []
+  topics: []
 
   # Optional SSL. By default is off.
   # List of root certificates for HTTPS server verifications
