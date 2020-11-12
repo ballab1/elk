@@ -2,13 +2,15 @@
 # For more information on multiple pipelines, see the documentation:
 #   https://www.elastic.co/guide/en/logstash/current/multiple-pipelines.html
 
-- pipeline.id: syslog-pipeline
-  path.config: "/usr/share/logstash/pipelines/syslog.conf"
-  pipeline.workers: 3
 - pipeline.id: beats-pipeline
   path.config: "/usr/share/logstash/pipelines/beats.conf"
   pipeline.workers: 2
+- pipeline.id: syslog_pipeline
+  path.config: "/usr/share/logstash/pipelines/syslog.conf"
+  pipeline.workers: 3
 - pipeline.id: nginx_access-pipeline
   path.config: "/usr/share/logstash/pipelines/nginx_access.conf"
   pipeline.workers: 2
-  
+- pipeline.id: docker-registry-pipeline
+  path.config: "/usr/share/logstash/pipelines/docker-registry.conf"
+  pipeline.workers: 2
