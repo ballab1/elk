@@ -1,3 +1,5 @@
 node.name:    elasticsearch
 network.host: elasticsearch
 http.port:9200
+xpack.security.enabled: true
+discovery.type: single-node
