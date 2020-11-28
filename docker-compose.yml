@@ -238,9 +238,11 @@ services:
             - "514:5514/udp"
             - "5044:5044"
             - "9600:9600"
+            - "8080:8080"
         restart: unless-stopped
         volumes:
-            - ./logstash/config/:/usr/share/logstash/config
+            - ./logstash/patterns:/usr/share/logstash/patterns
+            - ./logstash/config:/usr/share/logstash/config
             - ./logstash/pipelines:/usr/share/logstash/pipelines
             - ./logstash/log:/var/log
 
