@@ -3,6 +3,12 @@ completion_msg:
 
 container_os: elk
 
+comandline:
+    - "--latest"
+
+waitoptions:
+    LOGSTASH: "Successfully started Logstash API endpoint"
+
 environment:
     ELKID: '1000'
 

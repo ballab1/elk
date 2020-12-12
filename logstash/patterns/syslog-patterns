@@ -5,17 +5,22 @@ SYSLOGPID %{NONNEGINT}
 SYSLOGMESSAGE %{GREEDYDATA}
 K8STIME I%{MONTHNUM}%{MONTHDAY} %{TIME}
 K8SAPP [^\[]+?
+NOTPID [^\[\]:]+
 K8SAPPINFO \d+ I.+\d+
 NGINXERR \*\d+%{DATA},
-SYSLOGNGINXERROR nginx_error: %{BBTS:nginx_timestamp} \[%{WORD:nginx_severity}\] %{SYSLOGPID:syslog_pid}#%{SYSLOGPID}:%{SYSLOGMESSAGE:nginx_message}
-SYSLOGNGINXACCESS nginx_access: %{SYSLOGMESSAGE:nginx_message}
-SYSLOGJENKINS jenkins:? - - - ( @cee: )?%{SYSLOGMESSAGE:jenkins_msg1}
-SYSLOGMSG1 %{NOTSPACE:syslog_program}(\[%{SYSLOGPID:syslog_pid}\]): %{SYSLOGMESSAGE:syslog1_message}
-SYSLOGMSG2 %{NOTSPACE:syslog_program}: %{SYSLOGMESSAGE:syslog1_message}
-SYSLOGK8S %{K8SAPP:syslog_program}\[%{K8SAPPINFO:syslog_appinfo}\] %{SYSLOGMESSAGE:micrk8s_message}
-DATESTAMP_JENKINS %{MONTH} %{MONTHDAY}, %{YEAR} %{TIME} (AM|PM)?
+DATESTAMP_JENKINS (?:%{MONTH} %{MONTHDAY}, %{YEAR} %{TIME} (AM|PM))
 NGINXERRMSG ([^,]+)
-#BBREQUEST %{WORD:http_verb} %{NOTSPACE:http_request} HTTP/%{NUMBER:http_version}
-BBREQUEST (?:%{WORD:verb} %{NOTSPACE:request}(?: HTTP/%{NUMBER:httpversion})?)
+WATCHDOGSTATS INFO: Watchdog Statistics: %{GREEDYDATA:watchdog_statistics}
+
+SYSLOGNGINXERROR nginx_error: %{BBTS:nginx_timestamp} \[%{WORD:nginx_severity}\] %{SYSLOGPID:syslog_pid}#%{SYSLOGPID}:\s*%{SYSLOGMESSAGE:nginx_message}
+SYSLOGNGINXACCESS nginx_access: %{SYSLOGMESSAGE:nginx_message}
+SYSLOGJENKINS jenkins:? - - - ( @cee: )?%{DATESTAMP_JENKINS:jenkins_timestamp} %{GREEDYDATA:jenkins_message}
+SYSLOGMSG1 (%{NOTPID:syslog_program})?\[%{SYSLOGPID:syslog_pid}\]: %{SYSLOGMESSAGE:syslog1_message}
+SYSLOGMSG2 %{NOTPID:syslog_program}: %{SYSLOGMESSAGE:syslog1_message}
+SYSLOGK8S %{K8SAPP:syslog_program}\[%{K8SAPPINFO:syslog_appinfo}\] %{SYSLOGMESSAGE:micrk8s_message}
+
+#BBREQUEST %{WORD:request_method} %{NOTSPACE:request_path} %{NOTSPACE:http_version}
+BBREQUEST (?:%{WORD:verb} %{NOTSPACE:request}(?: HTTP/%{NUMBER:httpversion})?|%{DATA:rawrequest})
+
 #BBSYSLOG %{SYSLOGPRI:syslog_pri}(?:\d )?(%{SYSLOGTIMESTAMP:syslog_timestamp1}|%{TIMESTAMP_ISO8601:syslog_timestamp2}) %{SYSLOGHOST:syslog_hostname} (%{SYSLOGNGINXERROR:msg1}|%{SYSLOGNGINXACCESS:msg2}|%{SYSLOGJENKINS:msg3}|%{SYSLOGK8S:msg4}|%{SYSLOGMSG1:msg}|%{SYSLOGMSG2:msg})
 BBSYSLOG (%{SYSLOGNGINXERROR:msg1}|%{SYSLOGNGINXACCESS:msg2}|%{SYSLOGJENKINS:msg3}|%{SYSLOGK8S:msg4}|%{SYSLOGMSG1:msg5}|%{SYSLOGMSG2:msg6})

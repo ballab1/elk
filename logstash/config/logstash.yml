@@ -10,6 +10,8 @@
 
 monitoring.enabled: true
 monitoring.elasticsearch.hosts: ['http://${ELASTICSEARCH_HOSTS:elasticsearch:9200}']
+pipeline.ordered: false
+pipeline.ecs_compatibility: disabled
 
 #xpack.management.enabled: true
 #xpack.monitoring.enabled: true

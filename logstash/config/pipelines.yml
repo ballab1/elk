@@ -26,6 +26,12 @@
 - pipeline.id: docker_registry_pipeline
   path.config: "/usr/share/logstash/pipelines/docker-registry.conf"
   pipeline.workers: 1
+- pipeline.id: jenkins_logstash_pipeline
+  path.config: "/usr/share/logstash/pipelines/jenkins-logstash.conf"
+  pipeline.workers: 1
 - pipeline.id: other_pipeline
   path.config: "/usr/share/logstash/pipelines/other.conf"
+  pipeline.workers: 1
+- pipeline.id: jenkns_log_pipeline
+  path.config: "/usr/share/logstash/pipelines/jenkins-log.conf"
   pipeline.workers: 1
