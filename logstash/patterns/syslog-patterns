@@ -3,12 +3,13 @@ BBTS %{YEAR}/%{MONTHNUM}/%{MONTHDAY} %{TIME}
 SYSLOGPROGRAM %{DATA}
 SYSLOGPID %{NONNEGINT}
 SYSLOGMESSAGE %{GREEDYDATA}
-K8STIME I%{MONTHNUM}%{MONTHDAY} %{TIME}
-K8SAPP [^\[]+?
 NOTPID [^\[\]:]+
-K8SAPPINFO \d+ I.+\d+
-NGINXERR \*\d+%{DATA},
 DATESTAMP_JENKINS (?:%{MONTH} %{MONTHDAY}, %{YEAR} %{TIME} (AM|PM))
+
+K8STIME I%{MONTHNUM}%{MONTHDAY} %{TIME}
+K8SAPP microk8s%{NOTPID}
+K8SAPPINFO \d+ .+\d+
+NGINXERR \*\d+%{DATA},
 NGINXERRMSG ([^,]+)
 WATCHDOGSTATS INFO: Watchdog Statistics: %{GREEDYDATA:watchdog_statistics}
 
@@ -17,7 +18,7 @@ SYSLOGNGINXACCESS nginx_access: %{SYSLOGMESSAGE:nginx_message}
 SYSLOGJENKINS jenkins:? - - - ( @cee: )?%{DATESTAMP_JENKINS:jenkins_timestamp} %{GREEDYDATA:jenkins_message}
 SYSLOGMSG1 (%{NOTPID:syslog_program})?\[%{SYSLOGPID:syslog_pid}\]: %{SYSLOGMESSAGE:syslog1_message}
 SYSLOGMSG2 %{NOTPID:syslog_program}: %{SYSLOGMESSAGE:syslog1_message}
-SYSLOGK8S %{K8SAPP:syslog_program}\[%{K8SAPPINFO:syslog_appinfo}\] %{SYSLOGMESSAGE:micrk8s_message}
+SYSLOGK8S (%{NOTPID:syslog_program}\[%{K8SAPPINFO:syslog_appinfo}\] %{SYSLOGMESSAGE:microk8s_message})|(%{NOTPID:syslog_program}\[%{SYSLOGPID:syslog_pid}\]? %{SYSLOGMESSAGE:microk8s_message})
 
 #BBREQUEST %{WORD:request_method} %{NOTSPACE:request_path} %{NOTSPACE:http_version}
 BBREQUEST (?:%{WORD:verb} %{NOTSPACE:request}(?: HTTP/%{NUMBER:httpversion})?|%{DATA:rawrequest})
