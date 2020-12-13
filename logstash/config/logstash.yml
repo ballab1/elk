@@ -8,6 +8,8 @@
 #log.level: trace
 #log.format: json
 
+http.host: "0.0.0.0"
+
 monitoring.enabled: true
 monitoring.elasticsearch.hosts: ['http://${ELASTICSEARCH_HOSTS:elasticsearch:9200}']
 pipeline.ordered: false
