@@ -3,9 +3,9 @@
 
 - module: logstash
   metricsets:
-    - node
-    - node_stats
+    - _node
+    - _node/stats
   period: 10s
-  hosts: ["logstash:9600"]
+  hosts: ["http://logstash:9600"]
   #username: "user"
   #password: "secret"

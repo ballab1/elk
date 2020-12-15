@@ -1,7 +1,10 @@
 #logging.level: debug
 
-output.elasticsearch:
-  hosts: ['${ELASTICSEARCH_HOSTS:elasticsearch:9200}']
+output.logstash:
+  hosts: ["logstash:5044"]
+
+#output.elasticsearch:
+#  hosts: ['${ELASTICSEARCH_HOSTS:elasticsearch:9200}']
 #  username: '${ELASTICSEARCH_USERNAME:}'
 #  password: '${ELASTICSEARCH_PASSWORD:}'
 
@@ -17,4 +20,5 @@ metricbeat.config:
   modules:
     path: ${path.config}/modules.d/*.yml
     reload.enabled: false
- 
+
+setup.dashboards.enabled: true

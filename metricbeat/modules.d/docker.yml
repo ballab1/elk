@@ -12,7 +12,8 @@
     - memory
     - network
   period: 10s
-  hosts: ["unix:///var/run/docker.sock"]
+#  hosts: ["unix:///var/run/docker.sock"]
+  hosts: ["http://10.3.1.6:4243", "http://10.3.1.10:4243", "http://10.3.1.14:4243", "http://10.3.1.15:4243", "http://10.3.1.16:4243", "http://10.3.1.17:4243" ]
 
   # If set to true, replace dots in labels with `_`.
   #labels.dedot: false
