@@ -11,10 +11,10 @@ output.logstash:
 setup.kibana:
   host: "kibana:5601"
 
-metricbeat.autodiscover:
-  providers:
-    - type: docker
-      hints.enabled: true
+#metricbeat.autodiscover:
+#  providers:
+#    - type: docker
+#      hints.enabled: true
 
 metricbeat.config:
   modules:

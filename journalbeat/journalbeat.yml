@@ -2,19 +2,25 @@
 setup:
   kibana:
     host: "kibana:5601"
-  template:
-    name:
-    pattern:
+#  template:
+#    name:  true
+#    pattern:  true
+
+setup.dashboards.enabled: true 
 
 journalbeat.inputs:
 - paths: ["/host/journal/d8deea406ba84f578660c3c1fce7cb20/system.journal",
           "/host/journal/d8deea406ba84f578660c3c1fce7cb20/user-1000.journal" ]
   seek: head
 
-output.elasticsearch:
-  hosts: '${ELASTICSEARCH_HOSTS:elasticsearch:9200}'
-  username: '${ELASTICSEARCH_USERNAME:}'
-  password: '${ELASTICSEARCH_PASSWORD:}'
+output.logstash:
+  enabled: true
+  hosts: ["127.0.0.1:5044"]
+  
+#output.elasticsearch:
+#  hosts: ['${ELASTICSEARCH_HOSTS:elasticsearch:9200}']
+#  username: '${ELASTICSEARCH_USERNAME:}'
+#  password: '${ELASTICSEARCH_PASSWORD:}'
 #    index: "%{[@metadata][beat]}-%{[@metadata][version]}" 
 
 #output.logstash:

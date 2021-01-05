@@ -6,6 +6,6 @@
     - _node
     - _node/stats
   period: 10s
-  hosts: ["http://logstash:9600"]
+  hosts: ["logstash:9600"]
   #username: "user"
   #password: "secret"

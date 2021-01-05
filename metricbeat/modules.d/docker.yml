@@ -9,7 +9,7 @@
     - event
     - healthcheck
     - info
-    - memory
+#    - memory
     - network
   period: 10s
 #  hosts: ["unix:///var/run/docker.sock"]
