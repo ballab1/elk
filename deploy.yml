@@ -31,3 +31,8 @@ versions:
     dir: ${WORKSPACE_DIR}/.versions
     commit: d106c1d2b31307a67a13a3f8b2cf286adaf8acd5
     branch: master
+
+default_args:
+    cmd: 'deploy.restart'
+    latest: 'HEAD'
+    container_tag: '7.10.1'

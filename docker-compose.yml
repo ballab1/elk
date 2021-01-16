@@ -78,6 +78,10 @@ services:
             bootstrap.memory_lock: 'true'
             ES_JAVA_OPTS: "-Xms512m -Xmx512m"
             discovery.type: single-node
+            node.name:    elasticsearch
+            network.host: elasticsearch
+            http.port: 9200
+#            xpack.security.enabled: 'true'
         hostname: elasticsearch
         image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/elasticsearch:${ELASTICSEARCH_VERSION:-7.10.1}
         labels:

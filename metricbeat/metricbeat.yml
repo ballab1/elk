@@ -8,8 +8,7 @@ output.logstash:
 #  username: '${ELASTICSEARCH_USERNAME:}'
 #  password: '${ELASTICSEARCH_PASSWORD:}'
 
-setup.kibana:
-  host: "kibana:5601"
+setup.kibana.host: "kibana:5601"
 
 #metricbeat.autodiscover:
 #  providers:
@@ -21,4 +20,4 @@ metricbeat.config:
     path: ${path.config}/modules.d/*.yml
     reload.enabled: false
 
-setup.dashboards.enabled: true
+#setup.dashboards.enabled: true

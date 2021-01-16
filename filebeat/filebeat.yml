@@ -1,10 +1,5 @@
-output.elasticsearch:
-  hosts: '${ELASTICSEARCH_HOSTS:elasticsearch:9200}'
-  username: '${ELASTICSEARCH_USERNAME:}'
-  password: '${ELASTICSEARCH_PASSWORD:}'
- 
-setup.kibana:
-  host: "kibana:5601"
+#setup.kibana:
+#  host: "http://kibana:5601"
 
 filebeat.config:
   modules:
@@ -16,9 +11,14 @@ filebeat.autodiscover:
     - type: docker
       hints.enabled: true
 
-#output.logstash:
-#  hosts: ['logstash:5044']
-#  
+output.logstash:
+  hosts: ['logstash:5044']
+  
+#output.elasticsearch:
+#  hosts: '${ELASTICSEARCH_HOSTS:elasticsearch:9200}'
+#  username: '${ELASTICSEARCH_USERNAME:}'
+#  password: '${ELASTICSEARCH_PASSWORD:}'
+ 
 
 #filebeat.prospectors:
 #- input_type: log

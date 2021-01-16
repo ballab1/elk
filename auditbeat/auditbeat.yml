@@ -22,6 +22,6 @@ output.elasticsearch:
   username: '${ELASTICSEARCH_USERNAME:}'
   password: '${ELASTICSEARCH_PASSWORD:}'
 
-setup.kibana:
-  host: "kibana:5601"
+#setup.kibana:
+#  host: "http://kibana:5601"
  

@@ -9,4 +9,10 @@ server.host: "0"
 elasticsearch.hosts: '${ELASTICSEARCH_HOSTS:elasticsearch:9200}'
 monitoring.ui.container.elasticsearch.enabled: true
 
+xpack.security.enabled: true
+
 #enterpriseSearch.host: 'http://localhost:3002'
+
+
+#elasticsearch.username: "kibana_system"
+#elasticsearch.password: "123Oleary"
