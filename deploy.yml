@@ -13,7 +13,7 @@ environment:
     ELKID: '1000'
 
 thirdparty_versions:
-    ELK_VERSION: 7.10.1
+    ELK_VERSION: 7.10.2
     APM_VERSION: ${ELK_VERSION}
     AUDITBEAT_VERSION: ${ELK_VERSION}
     ELASTICSEARCH_VERSION: ${ELK_VERSION}
@@ -35,4 +35,4 @@ versions:
 default_args:
     cmd: 'deploy.restart'
     latest: 'HEAD'
-    container_tag: '7.10.1'
+    container_tag: '7.10.2'
