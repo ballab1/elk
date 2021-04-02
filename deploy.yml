@@ -1,5 +1,5 @@
 completion_msg:
-    - "To access Kibana, please open the following URL in your browser: http://${HOST_IP}:5601"
+    - "To access Kibana, please open the following URL in your browser: http://$(hostname -f):5601"
 
 container_os: elk
 
@@ -13,7 +13,7 @@ environment:
     ELKID: '1000'
 
 thirdparty_versions:
-    ELK_VERSION: 7.10.2
+    ELK_VERSION: 7.12.0
     APM_VERSION: ${ELK_VERSION}
     AUDITBEAT_VERSION: ${ELK_VERSION}
     ELASTICSEARCH_VERSION: ${ELK_VERSION}
@@ -35,4 +35,4 @@ versions:
 default_args:
     cmd: 'deploy.restart'
     latest: 'HEAD'
-    container_tag: '7.10.2'
+    container_tag: ${ELK_VERSION}

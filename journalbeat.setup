@@ -6,6 +6,9 @@
 #
 #############################################################################
 
+[ "${CONFIG_DIR:-}" ] || CONFIG_DIR="$(pwd)"
+[ "${WORKSPACE_DIR:-}" ] || WORKSPACE_DIR="$(pwd)/workspace.$(basename "$CONFIG_DIR")"
+
 declare -r config_dir="${CONFIG_DIR:?}/journalbeat"
 declare -r workspace_dir="${WORKSPACE_DIR:?}/journalbeat"
 
@@ -27,3 +30,4 @@ sudo chmod -R a+r "${workspace_dir}"
 
 # error loading config file: config file ("journalbeat.yml") must be owned by the user identifier (uid=0) or root
 sudo chown root "$workspace_dir/journalbeat.yml"
+exit 0

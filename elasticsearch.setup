@@ -6,6 +6,9 @@
 #
 #############################################################################
 
+[ "${CONFIG_DIR:-}" ] || CONFIG_DIR="$(pwd)"
+[ "${WORKSPACE_DIR:-}" ] || WORKSPACE_DIR="$(pwd)/workspace.$(basename "$CONFIG_DIR")"
+
 declare -r config_dir="${CONFIG_DIR:?}/elasticsearch"
 declare -r workspace_dir="${WORKSPACE_DIR:?}/elasticsearch"
 
@@ -27,4 +30,4 @@ sudo chown -R $ELKID:$(id -g) "$workspace_dir"
 sudo chmod -R a+r "${workspace_dir}"
 
 sudo sysctl -w vm.max_map_count=262144
-
+exit 0

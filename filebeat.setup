@@ -6,6 +6,9 @@
 #
 #############################################################################
 
+[ "${CONFIG_DIR:-}" ] || CONFIG_DIR="$(pwd)"
+[ "${WORKSPACE_DIR:-}" ] || WORKSPACE_DIR="$(pwd)/workspace.$(basename "$CONFIG_DIR")"
+
 declare -r config_dir="${CONFIG_DIR:?}/filebeat"
 declare -r workspace_dir="${WORKSPACE_DIR:?}/filebeat"
 
@@ -30,3 +33,4 @@ sudo chmod a+rw /run/docker.sock
 # there is an issue accessing /var/run/docker.sock.
 #  - unable to add 'filebeat' user to 'docker' group because each exist in different namespaces
 #  - to solve, chmod 666 /var/run/docker.sock
+exit 0

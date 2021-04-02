@@ -6,6 +6,9 @@
 #
 #############################################################################
 
+[ "${CONFIG_DIR:-}" ] || CONFIG_DIR="$(pwd)"
+[ "${WORKSPACE_DIR:-}" ] || WORKSPACE_DIR="$(pwd)/workspace.$(basename "$CONFIG_DIR")"
+
 declare -r config_dir="${CONFIG_DIR:?}/kibana"
 declare -r workspace_dir="${WORKSPACE_DIR:?}/kibana"
 
@@ -24,3 +27,4 @@ fi
 sudo cp -r "${config_dir}" "${WORKSPACE_DIR}/"
 sudo chown -R $ELKID:$(id -g) "$workspace_dir"
 sudo chmod -R a+r "${workspace_dir}"
+exit 0
