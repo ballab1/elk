@@ -10,7 +10,7 @@ services:
 #        environment:
 #            setup.kibana.host: kibana:5601
 #        hostname: apm
-#        image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/apm-server:${APM_VERSION:-7.5.0}
+#        image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/apm-server:${APM_VERSION:-7.12.1}
 #        labels:
 #            co.elastic.metrics/hosts: '$${data.host}:$${data.port}'
 #            co.elastic.metrics/metricsets: status
@@ -44,7 +44,7 @@ services:
 #        environment:
 #            SETUP_KIBANA_HOST: kibana:5601
 #        hostname: auditbeat
-#        image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/auditbeat:${AUDITBEAT_VERSION:-7.5.1}
+#        image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/auditbeat:${AUDITBEAT_VERSION:-7.12.1}
 #        labels:
 #            co.elastic.metrics/hosts: '$${data.host}:$${data.port}'
 #            co.elastic.metrics/metricsets: status
@@ -69,6 +69,8 @@ services:
        
     elasticsearch:
         container_name: elasticsearch
+#        depends_on:
+#            - kibana
         dns: 10.3.1.1
         dns_search:
             - ubuntu.home
@@ -83,7 +85,7 @@ services:
             http.port: 9200
 #            xpack.security.enabled: 'true'
         hostname: elasticsearch
-        image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/elasticsearch:${ELASTICSEARCH_VERSION:-7.12.0}
+        image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/elasticsearch:${ELASTICSEARCH_VERSION:-7.12.1}
         labels:
             co.elastic.metrics/hosts: '$${data.host}:$${data.port}'
             co.elastic.metrics/metricsets: status
@@ -118,7 +120,7 @@ services:
 #        environment:
 #            SETUP_KIBANA_HOST: kibana:5601
 #        hostname: filebeat
-#        image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/filebeat:${FILEBEAT_VERSION:-7.10.1}
+#        image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/filebeat:${FILEBEAT_VERSION:-7.12.1}
 #        labels:
 #            co.elastic.metrics/hosts: '$${data.host}:$${data.port}'
 #            co.elastic.metrics/metricsets: status
@@ -155,7 +157,7 @@ services:
 ##        stdin_open: true
 ##        tty: true
 #        hostname: journalbeat
-#        image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/journalbeat:${JOURNALBEAT_VERSION:-7.10.1}
+#        image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/journalbeat:${JOURNALBEAT_VERSION:-7.12.1}
 #        labels:
 #            co.elastic.metrics/hosts: '$${data.host}:$${data.port}'
 #            co.elastic.metrics/metricsets: status
@@ -188,7 +190,7 @@ services:
             ELASTICSEARCH_HOSTS: http://elasticsearch:9200
             SERVER_NAME: kibana
         hostname: kibana
-        image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/kibana:${KIBANA_VERSION:-7.12.0}
+        image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/kibana:${KIBANA_VERSION:-7.12.1}
         labels:
             co.elastic.metrics/hosts: '$${data.host}:$${data.port}'
             co.elastic.metrics/metricsets: status
@@ -221,7 +223,7 @@ services:
         environment:
             SETUP_KIBANA_HOST: kibana:5601
         hostname: logstash
-        image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/logstash:${LOGSTASH_VERSION:-7.12.0}
+        image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/logstash:${LOGSTASH_VERSION:-7.12.1}
         labels:
             co.elastic.metrics/hosts: '$${data.host}:$${data.port}'
             co.elastic.metrics/metricsets: status
@@ -258,9 +260,9 @@ services:
             - ubuntu.home
             - home
         environment:
-            SETUP_KIBANA_HOST: kibana:5601
+             SETUP_KIBANA_HOST: kibana:5601
         hostname: metricbeat
-        image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/metricbeat:${METRICBEAT_VERSION:-7.12.0}
+        image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/metricbeat:${METRICBEAT_VERSION:-7.12.1}
         labels:
             co.elastic.metrics/hosts: '$${data.host}:$${data.port}'
             co.elastic.metrics/metricsets: status
