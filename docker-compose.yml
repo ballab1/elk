@@ -85,7 +85,7 @@ services:
             http.port: 9200
 #            xpack.security.enabled: 'true'
         hostname: elasticsearch
-        image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/elasticsearch:${ELASTICSEARCH_VERSION:-7.13.0}
+        image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/elasticsearch:${ELASTICSEARCH_VERSION:-7.13.1}
         labels:
             co.elastic.metrics/hosts: '$${data.host}:$${data.port}'
             co.elastic.metrics/metricsets: status
@@ -190,7 +190,7 @@ services:
             ELASTICSEARCH_HOSTS: http://elasticsearch:9200
             SERVER_NAME: kibana
         hostname: kibana
-        image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/kibana:${KIBANA_VERSION:-7.13.0}
+        image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/kibana:${KIBANA_VERSION:-7.13.1}
         labels:
             co.elastic.metrics/hosts: '$${data.host}:$${data.port}'
             co.elastic.metrics/metricsets: status
@@ -223,7 +223,7 @@ services:
         environment:
             SETUP_KIBANA_HOST: kibana:5601
         hostname: logstash
-        image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/logstash:${LOGSTASH_VERSION:-7.13.0}
+        image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/logstash:${LOGSTASH_VERSION:-7.13.1}
         labels:
             co.elastic.metrics/hosts: '$${data.host}:$${data.port}'
             co.elastic.metrics/metricsets: status
@@ -262,7 +262,7 @@ services:
         environment:
              SETUP_KIBANA_HOST: kibana:5601
         hostname: metricbeat
-        image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/metricbeat:${METRICBEAT_VERSION:-7.13.0}
+        image: ${DOCKER_REGISTRY:-ubuntu-s2.home:5000/}thirdparty/metricbeat:${METRICBEAT_VERSION:-7.13.1}
         labels:
             co.elastic.metrics/hosts: '$${data.host}:$${data.port}'
             co.elastic.metrics/metricsets: status

@@ -13,7 +13,7 @@ environment:
     ELKID: '1000'
 
 thirdparty_versions:
-    ELK_VERSION: 7.13.0
+    ELK_VERSION: 7.13.1
     APM_VERSION: ${ELK_VERSION}
     AUDITBEAT_VERSION: ${ELK_VERSION}
     ELASTICSEARCH_VERSION: ${ELK_VERSION}
