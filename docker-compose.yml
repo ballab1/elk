@@ -3,7 +3,7 @@ version: '3.5'
 services:
 #    apm:
 #        container_name: apm
-#        dns: 10.3.1.1
+#        dns: 10.3.1.4
 #        dns_search:
 #            - ubuntu.home
 #            - home
@@ -37,7 +37,7 @@ services:
 #        cap_add:
 #            - ALL
 #        container_name: auditbeat
-#        dns: 10.3.1.1
+#        dns: 10.3.1.4
 #        dns_search:
 #            - ubuntu.home
 #            - home
@@ -71,7 +71,7 @@ services:
         container_name: elasticsearch
 #        depends_on:
 #            - kibana
-        dns: 10.3.1.1
+        dns: 10.3.1.4
         dns_search:
             - ubuntu.home
             - home
@@ -113,7 +113,7 @@ services:
 
 #    filebeat:
 #        container_name: filebeat
-#        dns: 10.3.1.1
+#        dns: 10.3.1.4
 #        dns_search:
 #            - ubuntu.home
 #            - home
@@ -147,7 +147,7 @@ services:
 #
 #    journalbeat:
 #        container_name: journalbeat
-#        dns: 10.3.1.1
+#        dns: 10.3.1.4
 #        dns_search:
 #            - ubuntu.home
 #            - home
@@ -182,7 +182,7 @@ services:
 
     kibana:
         container_name: kibana
-        dns: 10.3.1.1
+        dns: 10.3.1.4
         dns_search:
             - ubuntu.home
             - home
@@ -216,7 +216,7 @@ services:
         container_name: logstash
 #        command: "logstash -r -f /usr/share/logstash/config/logstash.yml"
 #        command: bash -c "bin/logstash-plugin install logstash-filter-metricize && logstash -f /etc/logstash/conf.d/logstash.conf "
-        dns: 10.3.1.1
+        dns: 10.3.1.4
         dns_search:
             - ubuntu.home
             - home
@@ -255,7 +255,7 @@ services:
 
     metricbeat:
         container_name: metricbeat
-        dns: 10.3.1.1
+        dns: 10.3.1.4
         dns_search:
             - ubuntu.home
             - home
